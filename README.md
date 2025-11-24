@@ -1,51 +1,106 @@
-🌊 Blue Whisper Ocean Club Bot
+# README.md
 
-A professional, bilingual Telegram bot for Blue Whisper Ocean Club's water sports and activities booking system.
-🎯 Features
+"""
 
-    Bilingual Support: English & Arabic (Oman)
-    Service Catalog: Jet Ski, Parasailing, Banana Boat, and more
-    Direct WhatsApp Integration: Seamless booking redirection
-    Social Media Links: Complete social presence
-    Professional UI: Clean, intuitive conversation flow
+# Blue Whisper Ocean Club - Intelligent Chatbot
 
-🏗️ Architecture
+## Overview
 
-blue-whisper-bot/
-├── src/
-│ ├── bot/ # Bot core logic
-│ ├── models/ # Data models
-│ ├── services/ # Business logic
-│ ├── handlers/ # Message handlers
-│ ├── utils/ # Utilities
-│ └── config/ # Configuration
-├── data/ # Static data files
-├── tests/ # Unit tests
-└── requirements.txt
+Enterprise-grade bilingual chatbot system for Blue Whisper Ocean Club in Oman.
+Provides interactive service discovery, pricing information, and reservation management.
 
-🚀 Quick Start
-bash
+## Features
 
-# Install dependencies
+- 🌐 Bilingual Support (English & Arabic)
+- 💰 Real-time Pricing Information
+- 🏖️ Complete Service Catalog
+- 📞 WhatsApp Integration
+- 📱 Social Media Links
+- 🎯 State Machine Architecture
 
-pip install -r requirements.txt
+## Architecture
 
-# Set environment variables
+```
+project/
+├── config/
+│   └── settings.py          # Application configuration & constants
+├── services/
+│   └── localization_service.py  # Multi-language support
+├── views/
+│   └── message_builder.py   # Message formatting layer
+├── controllers/
+│   └── bot_controller.py    # Core business logic & state management
+├── interfaces/
+│   └── console_interface.py # User interface layer
+└── main.py                  # Application entry point
+```
 
-export TELEGRAM_BOT_TOKEN="your_token_here"
-export WHATSAPP_NUMBER="+96812345678"
+## Design Patterns
 
-# Run the bot
+- **Singleton Pattern**: Configuration management
+- **Builder Pattern**: Complex message construction
+- **State Machine Pattern**: Conversation flow management
+- **Strategy Pattern**: Language-specific content delivery
+- **MVC Pattern**: Separation of concerns
 
-python -m src.main
+## Installation
 
-🛠️ Tech Stack
+```bash
+# Clone repository
+git clone https://github.com/yourusername/blue-whisper-bot.git
 
-    Python 3.11+
-    python-telegram-bot: Telegram Bot API
-    Pydantic: Data validation
-    python-dotenv: Environment management
+# Navigate to project directory
+cd blue-whisper-bot
 
-📝 License
+# No external dependencies required (uses Python stdlib only)
+```
+
+## Usage
+
+```bash
+# Run the chatbot
+python main.py
+```
+
+## Configuration
+
+Edit `config/settings.py` to customize:
+
+- Contact information
+- Service offerings and prices
+- Default language settings
+- Currency and pricing format
+
+## Services Offered
+
+1. Jet Ski - OMR 25.00 (30 minutes)
+2. Parasailing - OMR 35.00 (15 minutes)
+3. Banana Boat - OMR 15.00 (20 minutes)
+4. Snorkeling - OMR 20.00 (1 hour)
+5. Kayaking - OMR 18.00 (1 hour)
+6. Diving Experience - OMR 50.00 (2 hours)
+
+## Requirements
+
+- Python 3.8+
+- No external dependencies
+
+## Code Quality Standards
+
+- ✅ OOP Principles
+- ✅ SOLID Principles
+- ✅ Type Hints
+- ✅ Comprehensive Documentation
+- ✅ Clean Architecture
+- ✅ Design Patterns
+
+## License
 
 Proprietary - Blue Whisper Ocean Club © 2024
+
+## Contact
+
+- WhatsApp: +968-9123-4567
+- Email: info@bluewhisper.om
+- Website: www.bluewhisper.om
+  """
