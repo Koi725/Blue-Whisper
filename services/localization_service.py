@@ -23,7 +23,7 @@ class LocalizationService:
         return {
             Language.ENGLISH: {
                 "welcome": "🌊 Welcome to Blue Whisper Ocean Club! 🌊",
-                "welcome_subtitle": "Your Premium Ocean Adventure Destination in Oman",
+                "welcome_subtitle": "Your Premium Ocean Adventure Destination in Oman Muscat",
                 "welcome_message": "Experience the thrill of the ocean with our world-class water sports and activities.",
                 "language_prompt": "Please select your preferred language:",
                 "main_menu": "🏖️ Main Menu",
