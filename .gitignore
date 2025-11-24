@@ -1,3 +1,4 @@
+# .gitignore
 # Python
 __pycache__/
 *.py[cod]
@@ -25,9 +26,6 @@ venv/
 env/
 ENV/
 
-# Environment Variables
-.env
-
 # IDE
 .vscode/
 .idea/
@@ -35,16 +33,9 @@ ENV/
 *.swo
 *~
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-
-# Logs
-*.log
-logs/
-
 # OS
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log
