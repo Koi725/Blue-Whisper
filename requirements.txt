@@ -1,4 +1,59 @@
-Development dependencies (optional)
-pylint>=2.15.0
-mypy>=0.991
- black>=22.10.0
+# Core Dependencies
+python-telegram-bot==20.7
+python-dotenv==1.0.0
+
+# Production Dependencies
+aiohttp==3.9.1
+certifi==2023.11.17
+```
+
+---
+
+## STEP 11: Create Production .dockerignore
+
+Create file: `.dockerignore`
+```
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Scripts
+*.sh
+
+# Logs
+logs/
+*.log
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
