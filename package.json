@@ -1,0 +1,13 @@
+{
+  "name": "blue-whisper-whatsapp-bot",
+  "version": "1.0.0",
+  "description": "Blue Whisper Ocean Club WhatsApp Bot",
+  "main": "whatsapp_bot_simple.js",
+  "scripts": {
+    "start": "node whatsapp_bot_simple.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc.9",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
