@@ -43,6 +43,7 @@ services:
     volumes:
       - ./logs:/app/logs
       - ./auth_info_baileys:/app/auth_info_baileys
+      - ./images:/app/images  
     networks:
       - bot-network
     logging:
