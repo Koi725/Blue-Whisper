@@ -8,176 +8,206 @@ const userStates = {};
 const userLanguages = {};
 const humanMode = {};
 
-// Service images (base64 encoded - you can replace with actual image paths)
+// Service images paths
 const serviceImages = {
-    dolphin: './images/dolphin.jpg',
-    parasailing: './images/parasailing.jpg',
-    seaTrip: './images/sea_trip.jpg',
-    // crazyJet: './images/crazy_jet.jpg',
-    // shuttleBoat: './images/shuttle.jpg',
-    // bananaBoat: './images/banana.jpg',
-    // snorkeling: './images/snorkeling.jpg',
-    events: './images/events.jpg'
+    dolphin: path.join(__dirname, 'images', 'dolphin.jpg'),
+    parasailing: path.join(__dirname, 'images', 'parasailing.jpg'),
+    seaTrip: path.join(__dirname, 'images', 'sea_trip.jpg'),
+    waterSports: path.join(__dirname, 'images', 'water_sports.jpg'),
+    snorkeling: path.join(__dirname, 'images', 'snorkeling.jpg'),
+    events: path.join(__dirname, 'images', 'events.jpg')
 };
 
 const messages = {
     en: {
-        welcome: "🌊 *Welcome to Blue Whisper Ocean Club!* 🌊\n\n✨ _Your Premium Ocean Adventure in Oman_ ✨\n\nExperience the beauty of the ocean with our world-class activities!\n\n📍 Marina Bandar Al-Rowdha, Muscat\n\n",
+        welcome: "🌊 *Welcome to Blue Whisper Ocean Club!* 🌊\n\n✨ _Your Premium Ocean Adventure in Oman_ ✨\n\nExperience the beauty of the ocean with our world-class activities!\n\n📍 Marina Bandar Al-Rowdha, Muscat\n🌐 www.muscatjoy.com\n\n",
         
         mainChoice: "*How would you like to proceed?*\n\n🤖 *1* - Browse Services (Automated)\n👤 *2* - Speak with Our Team\n🎉 *3* - Special Events & Celebrations\n\n_Reply with a number_",
         
-        servicesMenu: "🏖️ *Our Ocean Activities*\n\n*1* 🐬 Dolphin Watching\n*2* 🪂 Parasailing\n*3* 🚤 Sea Trip\n*4* 🏄 Water Sports (Jet/Banana/Shuttle)\n*5* 🤿 Snorkeling Adventures\n*6* 💰 Payment Information\n\n*0* ⬅️ Back\n*9* 👤 Talk to Human\n\n_Choose an option:_",
+        servicesMenu: "🏖️ *Our Ocean Activities*\n\n*1* 🐬 Dolphin Watching\n*2* 🪂 Parasailing\n*3* 🚤 Sea Trip\n*4* 🏄 Water Sports\n*5* 🤿 Snorkeling\n*6* 💰 Payment Information\n\n*0* ⬅️ Back\n*9* 👤 Talk to Human\n\n_Choose an option:_",
         
-        dolphinMenu: "🐬 *Dolphin Watching Tours*\n\n📸 _Experience magical moments with dolphins!_\n\n*Choose your tour:*\n\n*1* 🚢 *Private Boat Tour*\n   💰 60 OMR (up to 6 people)\n   ⏰ 8:00-10:00 AM\n   ⏰ 10:00 AM-12:00 PM\n   ⏰ 12:00-2:00 PM\n\n*2* 🛥️ *Public Boat Tour*\n   💰 10 OMR per person\n   ⏰ 8:00-10:00 AM\n   ⏰ 10:00 AM-12:00 PM\n\n📍 Marina Bandar Al-Rowdha\n\n*0* ⬅️ Back\n*9* 📞 Book Now",
+        dolphinInfo: "🐬 *Dolphin Watching Tours*\n\n📸 _Experience magical moments with dolphins!_\n\n🚢 *Private Boat Tour*\n💰 60 OMR (up to 6 people)\n⏰ 8:00-10:00 AM | 10:00 AM-12:00 PM | 12:00-2:00 PM\n\n🛥️ *Public Boat Tour*\n💰 10 OMR per person\n⏰ 8:00-10:00 AM | 10:00 AM-12:00 PM\n\n📍 Marina Bandar Al-Rowdha\n\n*0* ⬅️ Back | *9* 📞 Book Now",
         
-        parasailingInfo: "🪂 *Parasailing Adventure*\n\n🦅 _Fly above the beautiful Omani coast!_\n\n💰 *Price:* 18 OMR per person\n⏱️ *Duration:* 30-40 minutes\n👥 *Capacity:* Depends on boat passengers (min 20 min)\n⚖️ *Max Weight:* 200 KG\n⏰ *Timing:* 8 AM until sunset\n\n⚠️ *Important:* Must book in advance on WhatsApp\n\n📍 Marina Bandar Al-Rowdha\n\n*0* ⬅️ Back\n*9* 📞 Book Now",
+        parasailingInfo: "🪂 *Parasailing Adventure*\n\n🦅 _Fly above the beautiful Omani coast!_\n\n💰 18 OMR per person\n⏱️ 30-40 minutes\n👥 Depends on boat passengers\n⚖️ Max Weight: 200 KG\n⏰ 8 AM - Sunset\n\n⚠️ *Must book in advance on WhatsApp*\n\n📍 Marina Bandar Al-Rowdha\n\n*0* ⬅️ Back | *9* 📞 Book Now",
         
-        seaTripInfo: "🚤 *Sea Trip Experience*\n\n🌊 _60-minute ocean journey with refreshments!_\n\n*Boat Options:*\n\n🛥️ *Capacity 5 people*\n   💰 Price varies by group\n   ⏱️ 60 minutes\n   🥤 Juice & Water included\n\n🚢 *Capacity 12 people*\n   💰 Price varies by group\n   ⏱️ 60 minutes\n   🥤 Juice & Water included\n\n⏰ *Timing:* 8 AM until sunset\n📍 Marina Bandar Al-Rowdha\n\n*0* ⬅️ Back\n*9* 📞 Book Now",
+        seaTripInfo: "🚤 *Sea Trip Experience*\n\n🌊 _60-minute ocean journey with refreshments!_\n\n🛥️ *Capacity 5 people* - 60 min + 🥤 Juice & Water\n🚢 *Capacity 12 people* - 60 min + 🥤 Juice & Water\n\n⏰ 8 AM - Sunset\n📍 Marina Bandar Al-Rowdha\n\n*0* ⬅️ Back | *9* 📞 Book Now",
         
-        waterSportsMenu: "🏄 *Water Sports Activities*\n\n*1* 🏍️ *Crazy Jet Boat*\n   💰 15 OMR/person\n   ⏱️ 15 minutes\n   👥 Max 10 people\n\n*2* 🚤 *Shuttle Boating*\n   💰 10 OMR/person\n   ⏱️ 15 minutes\n   👥 Max 4 people\n\n*3* 🍌 *Banana Boat*\n   💰 10 OMR/person\n   ⏱️ 15 minutes\n   👥 Max 8 people\n\n⏰ *Timing:* 8 AM until sunset\n\n*0* ⬅️ Back\n*9* 📞 Book Now",
+        waterSportsInfo: "🏄 *Water Sports Activities*\n\n🏍️ *Crazy Jet Boat*\n💰 15 OMR/person | ⏱️ 15 min | 👥 Max 10\n\n🚤 *Shuttle Boating*\n💰 10 OMR/person | ⏱️ 15 min | 👥 Max 4\n\n🍌 *Banana Boat*\n💰 10 OMR/person | ⏱️ 15 min | 👥 Max 8\n\n⏰ 8 AM - Sunset\n📍 Marina Bandar Al-Rowdha\n\n*0* ⬅️ Back | *9* 📞 Book Now",
         
-        snorkelingMenu: "🤿 *Snorkeling Adventures*\n\n*1* 🐠 *Snorkeling Only*\n   💰 12 OMR/person\n   ⏱️ 50-80 minutes\n   👥 Max 6 people\n\n*2* 🐬 *Snorkeling + Dolphin Watching*\n   💰 18 OMR/person\n   ⏱️ 150-180 minutes (2.5-3 hours)\n   👥 Max 6 people\n   ⏰ 8-11 AM | 11 AM-1 PM\n\n🌊 _Explore the underwater beauty of Oman!_\n\n*0* ⬅️ Back\n*9* 📞 Book Now",
+        snorkelingInfo: "🤿 *Snorkeling Adventures*\n\n🐠 *Snorkeling Only*\n💰 12 OMR/person | ⏱️ 50-80 min | 👥 Max 6\n\n🐬 *Snorkeling + Dolphin*\n💰 18 OMR/person | ⏱️ 150-180 min | 👥 Max 6\n⏰ 8-11 AM | 11 AM-1 PM\n\n🌊 _Explore underwater beauty!_\n\n*0* ⬅️ Back | *9* 📞 Book Now",
         
-        specialEventsInfo: "🎉 *Special Events & Celebrations*\n\n✨ _Make your special moments unforgettable!_\n\nWe organize:\n\n🎂 *Birthday Parties*\n💑 *Anniversary Celebrations*\n🎊 *Private Events*\n🏖️ *Beach Parties*\n👨‍👩‍👧‍👦 *Family Gatherings*\n\n🎨 *Customizable Themes:*\n   • Choose your color scheme\n   • Personalized decorations\n   • Special arrangements\n   • Catering options\n   • Photography services\n\n💰 *Pricing:* Custom quotes based on your needs\n\n📞 *Contact us to plan your dream event!*\n\n*0* ⬅️ Back\n*9* 📞 Speak with Event Planner",
+        eventsInfo: "🎉 *Special Events & Celebrations*\n\n✨ _Make your special moments unforgettable!_\n\nWe organize:\n🎂 Birthday Parties\n💑 Anniversary Celebrations\n🎊 Private Events\n🏖️ Beach Parties\n👨‍👩‍👧‍👦 Family Gatherings\n\n🎨 *Customizable Themes*\n• Color schemes\n• Personalized decorations\n• Catering options\n• Photography services\n\n📞 Contact us for custom quotes!\n\n*0* ⬅️ Back | *9* 📞 Speak with Event Planner",
         
-        paymentInfo: "💳 *Payment Information*\n\n🏦 *Bank Transfer:*\n   Bank: Muscat Bank\n   Account Name: ALHAMS ALAZRAQ LLC\n   IBAN: 0319049638080027\n\n📱 *Muscat Bank Mobile Payment:*\n   Account: 71902763\n   Name: Mohsen Amiri\n\n💵 *Cash Payment:*\n   Pay at Marina Bandar Al-Rowdha\n\n✅ *After payment, send receipt to:*\n   📞 +968-91220955\n   📞 +968-91142192\n\n*0* ⬅️ Back to Menu",
+        paymentInfo: "💳 *Payment Information*\n\n🏦 *Bank Transfer:*\nBank: Muscat Bank\nAccount: ALHAMS ALAZRAQ LLC\nIBAN: 0319049638080027\n\n📱 *Mobile Payment:*\nAccount: 71902763\nName: Mohsen Amiri\n\n💵 *Cash:* Pay at marina\n\n✅ Send receipt to:\n📞 +968-77752752\n📞 +968-91142192\n\n*0* ⬅️ Back",
         
-        bookingInfo: "📞 *Ready to Book?*\n\n*Contact us on WhatsApp:*\n📱 +968-91220955\n📱 +968-91142192\n\n*Direct WhatsApp Links:*\n🔗 https://wa.me/96891220955\n🔗 https://wa.me/96891142192\n\n📍 *Location:*\nMarina Bandar Al-Rowdha, Muscat\n\n⏰ *Operating Hours:*\n8:00 AM - Sunset (Daily)\n\n✨ _We look forward to serving you!_\n\n*0* ⬅️ Back to Menu",
+        bookingInfo: "📞 *Ready to Book?*\n\n*Contact us:*\n📱 +968-77752752\n📱 +968-91142192\n🌐 www.muscatjoy.com\n\n📍 Marina Bandar Al-Rowdha\n⏰ 8 AM - Sunset (Daily)\n\n✨ We look forward to serving you!\n\n*0* ⬅️ Back",
         
-        humanHandoff: "✅ *Connecting you to our team...*\n\n👨‍💼 One of our staff members will respond shortly.\n\n📞 *Or call us directly:*\n   +968-91220955\n   +968-91142192\n\n⏰ We respond within minutes during operating hours!\n\n_Type *MENU* anytime to return to automated service._",
-        
-        thankYou: "🙏 *Thank you for choosing Blue Whisper!*\n\n🌊 _We can't wait to welcome you!_\n\nType *MENU* to start over.",
+        humanHandoff: "✅ *Connecting to our team...*\n\n👨‍💼 A staff member will respond shortly.\n\n📞 *Direct contact:*\n+968-77752752\n+968-91142192\n🌐 www.muscatjoy.com\n\n⏰ Quick response during hours!\n\n_Type *MENU* to return to automated service._",
         
         invalid: "❌ Invalid option. Please try again."
     },
     
     ar: {
-        welcome: "🌊 *مرحباً بكم في نادي بلو ويسبر البحري!* 🌊\n\n✨ _وجهتكم المميزة للمغامرات البحرية في عمان_ ✨\n\nاستمتعوا بجمال المحيط مع أنشطتنا ذات المستوى العالمي!\n\n📍 مارينا بندر الروضة، مسقط\n\n",
+        welcome: "🌊 *مرحباً بكم في نادي بلو ويسبر البحري!* 🌊\n\n✨ _وجهتكم المميزة للمغامرات البحرية_ ✨\n\nاستمتعوا بجمال المحيط مع أنشطتنا!\n\n📍 مارينا بندر الروضة، مسقط\n🌐 www.muscatjoy.com\n\n",
         
-        mainChoice: "*كيف تريد المتابعة؟*\n\n🤖 *1* - تصفح الخدمات (آلي)\n👤 *2* - التحدث مع فريقنا\n🎉 *3* - المناسبات والاحتفالات الخاصة\n\n_أرسل رقماً_",
+        mainChoice: "*كيف تريد المتابعة؟*\n\n🤖 *1* - تصفح الخدمات (آلي)\n👤 *2* - التحدث مع فريقنا\n🎉 *3* - المناسبات الخاصة\n\n_أرسل رقماً_",
         
-        servicesMenu: "🏖️ *أنشطتنا البحرية*\n\n*1* 🐬 مشاهدة الدلافين\n*2* 🪂 الطيران الشراعي\n*3* 🚤 رحلة بحرية\n*4* 🏄 الرياضات المائية\n*5* 🤿 مغامرات الغوص\n*6* 💰 معلومات الدفع\n\n*0* ⬅️ رجوع\n*9* 👤 التحدث مع شخص\n\n_اختر خياراً:_",
+        servicesMenu: "🏖️ *أنشطتنا البحرية*\n\n*1* 🐬 مشاهدة الدلافين\n*2* 🪂 الطيران الشراعي\n*3* 🚤 رحلة بحرية\n*4* 🏄 الرياضات المائية\n*5* 🤿 الغوص\n*6* 💰 معلومات الدفع\n\n*0* ⬅️ رجوع\n*9* 👤 تحدث مع شخص\n\n_اختر خياراً:_",
         
-        dolphinMenu: "🐬 *جولات مشاهدة الدلافين*\n\n📸 _عيش لحظات سحرية مع الدلافين!_\n\n*اختر جولتك:*\n\n*1* 🚢 *قارب خاص*\n   💰 60 ريال (حتى 6 أشخاص)\n   ⏰ 8:00-10:00 صباحاً\n   ⏰ 10:00-12:00 ظهراً\n   ⏰ 12:00-2:00 مساءً\n\n*2* 🛥️ *قارب عام*\n   💰 10 ريال للشخص\n   ⏰ 8:00-10:00 صباحاً\n   ⏰ 10:00-12:00 ظهراً\n\n📍 مارينا بندر الروضة\n\n*0* ⬅️ رجوع\n*9* 📞 احجز الآن",
+        dolphinInfo: "🐬 *جولات مشاهدة الدلافين*\n\n📸 _عيش لحظات سحرية!_\n\n🚢 *قارب خاص*\n💰 60 ريال (حتى 6 أشخاص)\n⏰ 8-10 ص | 10-12 ظ | 12-2 م\n\n🛥️ *قارب عام*\n💰 10 ريال للشخص\n⏰ 8-10 ص | 10-12 ظ\n\n📍 مارينا بندر الروضة\n\n*0* ⬅️ رجوع | *9* 📞 احجز الآن",
         
-        parasailingInfo: "🪂 *مغامرة الطيران الشراعي*\n\n🦅 _حلق فوق ساحل عمان الجميل!_\n\n💰 *السعر:* 18 ريال للشخص\n⏱️ *المدة:* 30-40 دقيقة\n👥 *السعة:* حسب ركاب القارب (20 دقيقة كحد أدنى)\n⚖️ *الوزن الأقصى:* 200 كجم\n⏰ *التوقيت:* من 8 صباحاً حتى الغروب\n\n⚠️ *مهم:* يجب الحجز مسبقاً عبر واتساب\n\n📍 مارينا بندر الروضة\n\n*0* ⬅️ رجوع\n*9* 📞 احجز الآن",
+        parasailingInfo: "🪂 *مغامرة الطيران الشراعي*\n\n🦅 _حلق فوق ساحل عمان!_\n\n💰 18 ريال للشخص\n⏱️ 30-40 دقيقة\n👥 حسب ركاب القارب\n⚖️ الوزن الأقصى: 200 كجم\n⏰ 8 صباحاً - الغروب\n\n⚠️ *يجب الحجز مسبقاً*\n\n📍 مارينا بندر الروضة\n\n*0* ⬅️ رجوع | *9* 📞 احجز الآن",
         
-        seaTripInfo: "🚤 *تجربة الرحلة البحرية*\n\n🌊 _رحلة بحرية لمدة 60 دقيقة مع المرطبات!_\n\n*خيارات القوارب:*\n\n🛥️ *سعة 5 أشخاص*\n   💰 السعر يختلف حسب المجموعة\n   ⏱️ 60 دقيقة\n   🥤 عصير وماء متضمن\n\n🚢 *سعة 12 شخص*\n   💰 السعر يختلف حسب المجموعة\n   ⏱️ 60 دقيقة\n   🥤 عصير وماء متضمن\n\n⏰ *التوقيت:* من 8 صباحاً حتى الغروب\n📍 مارينا بندر الروضة\n\n*0* ⬅️ رجوع\n*9* 📞 احجز الآن",
+        seaTripInfo: "🚤 *تجربة الرحلة البحرية*\n\n🌊 _رحلة 60 دقيقة مع مرطبات!_\n\n🛥️ *سعة 5 أشخاص* - 60 دقيقة + 🥤 عصير وماء\n🚢 *سعة 12 شخص* - 60 دقيقة + 🥤 عصير وماء\n\n⏰ 8 صباحاً - الغروب\n📍 مارينا بندر الروضة\n\n*0* ⬅️ رجوع | *9* 📞 احجز الآن",
         
-        waterSportsMenu: "🏄 *أنشطة الرياضات المائية*\n\n*1* 🏍️ *قارب جت المجنون*\n   💰 15 ريال/شخص\n   ⏱️ 15 دقيقة\n   👥 حتى 10 أشخاص\n\n*2* 🚤 *القارب المكوكي*\n   💰 10 ريال/شخص\n   ⏱️ 15 دقيقة\n   👥 حتى 4 أشخاص\n\n*3* 🍌 *قارب الموز*\n   💰 10 ريال/شخص\n   ⏱️ 15 دقيقة\n   👥 حتى 8 أشخاص\n\n⏰ *التوقيت:* من 8 صباحاً حتى الغروب\n\n*0* ⬅️ رجوع\n*9* 📞 احجز الآن",
+        waterSportsInfo: "🏄 *الرياضات المائية*\n\n🏍️ *قارب جت المجنون*\n💰 15 ريال/شخص | ⏱️ 15 دقيقة | 👥 حتى 10\n\n🚤 *القارب المكوكي*\n💰 10 ريال/شخص | ⏱️ 15 دقيقة | 👥 حتى 4\n\n🍌 *قارب الموز*\n💰 10 ريال/شخص | ⏱️ 15 دقيقة | 👥 حتى 8\n\n⏰ 8 صباحاً - الغروب\n📍 مارينا بندر الروضة\n\n*0* ⬅️ رجوع | *9* 📞 احجز الآن",
         
-        snorkelingMenu: "🤿 *مغامرات الغوص*\n\n*1* 🐠 *الغوص فقط*\n   💰 12 ريال/شخص\n   ⏱️ 50-80 دقيقة\n   👥 حتى 6 أشخاص\n\n*2* 🐬 *الغوص + مشاهدة الدلافين*\n   💰 18 ريال/شخص\n   ⏱️ 150-180 دقيقة (2.5-3 ساعات)\n   👥 حتى 6 أشخاص\n   ⏰ 8-11 صباحاً | 11 صباحاً-1 ظهراً\n\n🌊 _استكشف الجمال تحت الماء في عمان!_\n\n*0* ⬅️ رجوع\n*9* 📞 احجز الآن",
+        snorkelingInfo: "🤿 *مغامرات الغوص*\n\n🐠 *الغوص فقط*\n💰 12 ريال/شخص | ⏱️ 50-80 دقيقة | 👥 حتى 6\n\n🐬 *الغوص + الدلافين*\n💰 18 ريال/شخص | ⏱️ 150-180 دقيقة | 👥 حتى 6\n⏰ 8-11 ص | 11 ص-1 ظ\n\n🌊 _استكشف الجمال تحت الماء!_\n\n*0* ⬅️ رجوع | *9* 📞 احجز الآن",
         
-        specialEventsInfo: "🎉 *المناسبات والاحتفالات الخاصة*\n\n✨ _اجعل لحظاتك الخاصة لا تُنسى!_\n\nننظم:\n\n🎂 *حفلات أعياد الميلاد*\n💑 *احتفالات الذكرى السنوية*\n🎊 *المناسبات الخاصة*\n🏖️ *حفلات الشاطئ*\n👨‍👩‍👧‍👦 *التجمعات العائلية*\n\n🎨 *ثيمات قابلة للتخصيص:*\n   • اختر نظام الألوان الخاص بك\n   • ديكورات شخصية\n   • ترتيبات خاصة\n   • خيارات الطعام\n   • خدمات التصوير\n\n💰 *التسعير:* عروض مخصصة حسب احتياجاتك\n\n📞 *اتصل بنا لتخطيط حدثك المثالي!*\n\n*0* ⬅️ رجوع\n*9* 📞 التحدث مع منظم المناسبات",
+        eventsInfo: "🎉 *المناسبات الخاصة*\n\n✨ _اجعل لحظاتك لا تُنسى!_\n\nننظم:\n🎂 حفلات أعياد الميلاد\n💑 احتفالات الذكرى\n🎊 المناسبات الخاصة\n🏖️ حفلات الشاطئ\n👨‍👩‍👧‍👦 التجمعات العائلية\n\n🎨 *ثيمات مخصصة*\n• نظام الألوان\n• ديكورات شخصية\n• خيارات الطعام\n• خدمات التصوير\n\n📞 اتصل بنا للعروض!\n\n*0* ⬅️ رجوع | *9* 📞 تحدث مع منظم المناسبات",
         
-        paymentInfo: "💳 *معلومات الدفع*\n\n🏦 *التحويل البنكي:*\n   البنك: بنك مسقط\n   اسم الحساب: ALHAMS ALAZRAQ LLC\n   IBAN: 0319049638080027\n\n📱 *الدفع عبر موبايل بنك مسقط:*\n   الحساب: 71902763\n   الاسم: محسن أميري\n\n💵 *الدفع النقدي:*\n   ادفع في مارينا بندر الروضة\n\n✅ *بعد الدفع، أرسل الإيصال إلى:*\n   📞 +968-91220955\n   📞 +968-91142192\n\n*0* ⬅️ رجوع للقائمة",
+        paymentInfo: "💳 *معلومات الدفع*\n\n🏦 *تحويل بنكي:*\nالبنك: بنك مسقط\nالحساب: ALHAMS ALAZRAQ LLC\nIBAN: 0319049638080027\n\n📱 *دفع موبايل:*\nالحساب: 71902763\nالاسم: محسن أميري\n\n💵 *نقدي:* ادفع في المارينا\n\n✅ أرسل الإيصال:\n📞 +968-77752752\n📞 +968-91142192\n\n*0* ⬅️ رجوع",
         
-        bookingInfo: "📞 *جاهز للحجز؟*\n\n*اتصل بنا على واتساب:*\n📱 +968-91220955\n📱 +968-91142192\n\n*روابط واتساب المباشرة:*\n🔗 https://wa.me/96891220955\n🔗 https://wa.me/96891142192\n\n📍 *الموقع:*\nمارينا بندر الروضة، مسقط\n\n⏰ *ساعات العمل:*\n8:00 صباحاً - الغروب (يومياً)\n\n✨ _نتطلع لخدمتكم!_\n\n*0* ⬅️ رجوع للقائمة",
+        bookingInfo: "📞 *جاهز للحجز؟*\n\n*اتصل بنا:*\n📱 +968-77752752\n📱 +968-91142192\n🌐 www.muscatjoy.com\n\n📍 مارينا بندر الروضة\n⏰ 8 صباحاً - الغروب (يومياً)\n\n✨ نتطلع لخدمتكم!\n\n*0* ⬅️ رجوع",
         
-        humanHandoff: "✅ *جاري توصيلك بفريقنا...*\n\n👨‍💼 سيرد عليك أحد موظفينا قريباً.\n\n📞 *أو اتصل بنا مباشرة:*\n   +968-91220955\n   +968-91142192\n\n⏰ نرد خلال دقائق أثناء ساعات العمل!\n\n_اكتب *MENU* في أي وقت للعودة للخدمة الآلية._",
-        
-        thankYou: "🙏 *شكراً لاختياركم بلو ويسبر!*\n\n🌊 _في انتظار استقبالكم!_\n\nاكتب *MENU* للبدء من جديد.",
+        humanHandoff: "✅ *جاري التوصيل بفريقنا...*\n\n👨‍💼 سيرد عليك موظف قريباً.\n\n📞 *اتصال مباشر:*\n+968-77752752\n+968-91142192\n🌐 www.muscatjoy.com\n\n⏰ رد سريع أثناء ساعات العمل!\n\n_اكتب *MENU* للعودة للخدمة الآلية._",
         
         invalid: "❌ خيار غير صحيح. حاول مرة أخرى."
     }
 };
 
+async function sendImageWithCaption(sock, userId, imagePath, caption) {
+    try {
+        if (fs.existsSync(imagePath)) {
+            const imageBuffer = fs.readFileSync(imagePath);
+            await sock.sendMessage(userId, {
+                image: imageBuffer,
+                caption: caption
+            });
+            return true;
+        } else {
+            console.log(`⚠️ Image not found: ${imagePath}`);
+            await sock.sendMessage(userId, { text: caption });
+            return false;
+        }
+    } catch (error) {
+        console.error(`❌ Error sending image: ${error.message}`);
+        await sock.sendMessage(userId, { text: caption });
+        return false;
+    }
+}
+
 function handleMessage(userId, message) {
     const input = message.trim().toLowerCase();
     
-    // Return to menu from human mode
     if (input === 'menu' && humanMode[userId]) {
         delete humanMode[userId];
         userStates[userId] = 'services';
         const lang = userLanguages[userId] || 'en';
-        return messages[lang].servicesMenu;
+        return { type: 'text', content: messages[lang].servicesMenu };
     }
     
-    // In human mode - don't respond
     if (humanMode[userId]) {
         return null;
     }
     
-    // New user
     if (!userStates[userId]) {
         userStates[userId] = 'language';
         userLanguages[userId] = 'en';
-        return messages.en.welcome + "*Select Language / اختر اللغة:*\n\n*1* - English 🇬🇧\n*2* - العربية 🇴🇲";
+        return { 
+            type: 'text', 
+            content: messages.en.welcome + "*Select Language / اختر اللغة:*\n\n*1* - English 🇬🇧\n*2* - العربية 🇴🇲" 
+        };
     }
     
     const lang = userLanguages[userId];
     const state = userStates[userId];
     
-    // Language selection
     if (state === 'language') {
         if (input === '1') {
             userLanguages[userId] = 'en';
             userStates[userId] = 'main_choice';
-            return messages.en.mainChoice;
+            return { type: 'text', content: messages.en.mainChoice };
         } else if (input === '2') {
             userLanguages[userId] = 'ar';
             userStates[userId] = 'main_choice';
-            return messages.ar.mainChoice;
+            return { type: 'text', content: messages.ar.mainChoice };
         }
-        return messages[lang].invalid;
+        return { type: 'text', content: messages[lang].invalid };
     }
     
-    // Main choice
     if (state === 'main_choice') {
         if (input === '1') {
             userStates[userId] = 'services';
-            return messages[lang].servicesMenu;
+            return { type: 'text', content: messages[lang].servicesMenu };
         } else if (input === '2') {
             humanMode[userId] = true;
-            return messages[lang].humanHandoff;
+            return { type: 'text', content: messages[lang].humanHandoff };
         } else if (input === '3') {
-            userStates[userId] = 'special_events';
-            return messages[lang].specialEventsInfo;
+            userStates[userId] = 'events';
+            return { 
+                type: 'image', 
+                imagePath: serviceImages.events,
+                content: messages[lang].eventsInfo 
+            };
         }
-        return messages[lang].invalid + '\n\n' + messages[lang].mainChoice;
+        return { type: 'text', content: messages[lang].invalid + '\n\n' + messages[lang].mainChoice };
     }
     
-    // Services menu
     if (state === 'services') {
         if (input === '1') {
-            userStates[userId] = 'dolphin';
-            return messages[lang].dolphinMenu;
+            return { 
+                type: 'image', 
+                imagePath: serviceImages.dolphin,
+                content: messages[lang].dolphinInfo 
+            };
         } else if (input === '2') {
-            userStates[userId] = 'parasailing';
-            return messages[lang].parasailingInfo;
+            return { 
+                type: 'image', 
+                imagePath: serviceImages.parasailing,
+                content: messages[lang].parasailingInfo 
+            };
         } else if (input === '3') {
-            userStates[userId] = 'sea_trip';
-            return messages[lang].seaTripInfo;
+            return { 
+                type: 'image', 
+                imagePath: serviceImages.seaTrip,
+                content: messages[lang].seaTripInfo 
+            };
         } else if (input === '4') {
-            userStates[userId] = 'water_sports';
-            return messages[lang].waterSportsMenu;
+            return { 
+                type: 'image', 
+                imagePath: serviceImages.waterSports,
+                content: messages[lang].waterSportsInfo 
+            };
         } else if (input === '5') {
-            userStates[userId] = 'snorkeling';
-            return messages[lang].snorkelingMenu;
+            return { 
+                type: 'image', 
+                imagePath: serviceImages.snorkeling,
+                content: messages[lang].snorkelingInfo 
+            };
         } else if (input === '6') {
-            return messages[lang].paymentInfo;
+            return { type: 'text', content: messages[lang].paymentInfo };
         } else if (input === '0') {
             userStates[userId] = 'main_choice';
-            return messages[lang].mainChoice;
+            return { type: 'text', content: messages[lang].mainChoice };
         } else if (input === '9') {
             humanMode[userId] = true;
-            return messages[lang].humanHandoff;
+            return { type: 'text', content: messages[lang].humanHandoff };
         }
-        return messages[lang].invalid + '\n\n' + messages[lang].servicesMenu;
+        return { type: 'text', content: messages[lang].invalid + '\n\n' + messages[lang].servicesMenu };
     }
     
-    // Dolphin menu
-    if (state === 'dolphin' || state === 'parasailing' || state === 'sea_trip' || state === 'water_sports' || state === 'snorkeling' || state === 'special_events') {
+    if (['events'].includes(state)) {
         if (input === '0') {
-            userStates[userId] = 'services';
-            return messages[lang].servicesMenu;
+            userStates[userId] = 'main_choice';
+            return { type: 'text', content: messages[lang].mainChoice };
         } else if (input === '9') {
-            return messages[lang].bookingInfo;
+            return { type: 'text', content: messages[lang].bookingInfo };
         }
-        return messages[lang].invalid;
+        return { type: 'text', content: messages[lang].invalid };
     }
     
-    return messages[lang].invalid;
+    return { type: 'text', content: messages[lang].invalid };
 }
 
 async function startWhatsAppBot() {
@@ -208,7 +238,9 @@ async function startWhatsAppBot() {
             console.log('\n✅ WhatsApp Bot Connected!');
             console.log('🌊 Blue Whisper Ocean Club - LIVE');
             console.log('📍 Marina Bandar Al-Rowdha');
-            console.log('🎯 All services active\n');
+            console.log('🌐 www.muscatjoy.com');
+            console.log('🎯 All services active');
+            console.log('📸 Image sending enabled\n');
         }
     });
 
@@ -232,8 +264,17 @@ async function startWhatsAppBot() {
             }
             
             if (response) {
-                await sock.sendMessage(userId, { text: response });
-                console.log(`✅ Replied to ${userName}\n`);
+                if (response.type === 'image') {
+                    const sent = await sendImageWithCaption(sock, userId, response.imagePath, response.content);
+                    if (sent) {
+                        console.log(`📸 [IMAGE] Sent to ${userName}\n`);
+                    } else {
+                        console.log(`✅ [TEXT] Replied to ${userName} (image not found)\n`);
+                    }
+                } else {
+                    await sock.sendMessage(userId, { text: response.content });
+                    console.log(`✅ [TEXT] Replied to ${userName}\n`);
+                }
             }
         } catch (error) {
             console.error('❌ Error:', error.message);
@@ -248,6 +289,9 @@ console.log('   🪂 Parasailing');
 console.log('   🚤 Sea Trips');
 console.log('   🏄 Water Sports');
 console.log('   🤿 Snorkeling');
-console.log('   🎉 Special Events\n');
+console.log('   🎉 Special Events');
+console.log('\n📸 Image support: ENABLED');
+console.log('🌐 Website: www.muscatjoy.com');
+console.log('📞 Contact: +968-77752752\n');
 
 startWhatsAppBot().catch(err => console.error('Error:', err));
