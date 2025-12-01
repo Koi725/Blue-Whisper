@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  bluewhisper-bot:
+  telegram-bot:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: bluewhisper-ocean-bot
+    container_name: bluewhisper-telegram-bot
     restart: unless-stopped
     env_file:
       - .env
@@ -28,6 +28,37 @@ services:
         reservations:
           cpus: '0.25'
           memory: 128M
+    command: ["python", "-u", "main.py"]
+
+  whatsapp-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.whatsapp
+    container_name: bluewhisper-whatsapp-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Muscat
+    volumes:
+      - ./logs:/app/logs
+      - ./auth_info_baileys:/app/auth_info_baileys
+    networks:
+      - bot-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+    command: ["node", "whatsapp_bot_complete.js"]
 
 networks:
   bot-network:

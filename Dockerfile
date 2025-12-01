@@ -1,35 +1,36 @@
-# Use official Python runtime as base image
-FROM python:3.11-slim
+# Use Node.js 20 for WhatsApp bot
+FROM node:20-slim
 
-# Set working directory in container
+# Set working directory
 WORKDIR /app
 
 # Set environment variables
-ENV PYTHONUNBUFFERED=1 \
-  PYTHONDONTWRITEBYTECODE=1 \
-  PIP_NO_CACHE_DIR=1 \
-  PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV NODE_ENV=production
+
+# Copy package files
+COPY package*.json ./
 
 # Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN npm install --production
 
-# Copy project files
+# Copy bot files
+COPY whatsapp_bot_complete.js .
 COPY config/ ./config/
 COPY services/ ./services/
 COPY views/ ./views/
 COPY controllers/ ./controllers/
-COPY adapters/ ./adapters/
-COPY main.py .
 
-# Create non-root user for security
+# Create directory for auth info
+RUN mkdir -p /app/auth_info_baileys
+
+# Create non-root user
 RUN useradd -m -u 1000 botuser && \
   chown -R botuser:botuser /app
 USER botuser
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD python -c "import sys; sys.exit(0)"
+  CMD node -e "process.exit(0)"
 
-# Run the bot
-CMD ["python", "-u", "main.py"]
+# Run WhatsApp bot
+CMD ["node", "whatsapp_bot_complete.js"]
