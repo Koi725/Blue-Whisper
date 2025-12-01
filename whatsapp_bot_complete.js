@@ -38,11 +38,11 @@ const messages = {
         
         eventsInfo: "🎉 *Special Events & Celebrations*\n\n✨ _Make your special moments unforgettable!_\n\nWe organize:\n🎂 Birthday Parties\n💑 Anniversary Celebrations\n🎊 Private Events\n🏖️ Beach Parties\n👨‍👩‍👧‍👦 Family Gatherings\n\n🎨 *Customizable Themes*\n• Color schemes\n• Personalized decorations\n• Catering options\n• Photography services\n\n📞 Contact us for custom quotes!\n\n*0* ⬅️ Back | *9* 📞 Speak with Event Planner",
         
-        paymentInfo: "💳 *Payment Information*\n\n🏦 *Bank Transfer:*\nBank: Muscat Bank\nAccount: ALHAMS ALAZRAQ LLC\nIBAN: 0319049638080027\n\n📱 *Mobile Payment:*\nAccount: 71902763\nName: Mohsen Amiri\n\n💵 *Cash:* Pay at marina\n\n✅ Send receipt to:\n📞 +968-77752752\n📞 +968-91142192\n\n*0* ⬅️ Back",
+        paymentInfo: "💳 *Payment Information*\n\n🏦 *Bank Transfer:*\nBank: Muscat Bank\nAccount: ALHAMS ALAZRAQ LLC\nIBAN: 0319049638080027\n\n📱 *Mobile Payment:*\nAccount: 71902763\nName: Mohsen Amiri\n\n💵 *Cash:* Pay at marina\n\n✅ Send receipt to:\n📞 +968-77752752\n📞 +968-91220956\n\n*0* ⬅️ Back",
         
-        bookingInfo: "📞 *Ready to Book?*\n\n*Contact us:*\n📱 +968-77752752\n📱 +968-91142192\n🌐 www.muscatjoy.com\n\n📍 Marina Bandar Al-Rowdha\n⏰ 8 AM - Sunset (Daily)\n\n✨ We look forward to serving you!\n\n*0* ⬅️ Back",
+        bookingInfo: "📞 *Ready to Book?*\n\n*Contact us:*\n📱 +968-77752752\n📱+968-91220956\n🌐 www.muscatjoy.com\n\n📍 Marina Bandar Al-Rowdha\n⏰ 8 AM - Sunset (Daily)\n\n✨ We look forward to serving you!\n\n*0* ⬅️ Back",
         
-        humanHandoff: "✅ *Connecting to our team...*\n\n👨‍💼 A staff member will respond shortly.\n\n📞 *Direct contact:*\n+968-77752752\n+968-91142192\n🌐 www.muscatjoy.com\n\n⏰ Quick response during hours!\n\n_Type *MENU* to return to automated service._",
+        humanHandoff: "✅ *Connecting to our team...*\n\n👨‍💼 A staff member will respond shortly.\n\n📞 *Direct contact:*\n+968-77752752\n+968-91220956\n🌐 www.muscatjoy.com\n\n⏰ Quick response during hours!\n\n_Type *MENU* to return to automated service._",
         
         invalid: "❌ Invalid option. Please try again."
     },
@@ -66,11 +66,11 @@ const messages = {
         
         eventsInfo: "🎉 *المناسبات الخاصة*\n\n✨ _اجعل لحظاتك لا تُنسى!_\n\nننظم:\n🎂 حفلات أعياد الميلاد\n💑 احتفالات الذكرى\n🎊 المناسبات الخاصة\n🏖️ حفلات الشاطئ\n👨‍👩‍👧‍👦 التجمعات العائلية\n\n🎨 *ثيمات مخصصة*\n• نظام الألوان\n• ديكورات شخصية\n• خيارات الطعام\n• خدمات التصوير\n\n📞 اتصل بنا للعروض!\n\n*0* ⬅️ رجوع | *9* 📞 تحدث مع منظم المناسبات",
         
-        paymentInfo: "💳 *معلومات الدفع*\n\n🏦 *تحويل بنكي:*\nالبنك: بنك مسقط\nالحساب: ALHAMS ALAZRAQ LLC\nIBAN: 0319049638080027\n\n📱 *دفع موبايل:*\nالحساب: 71902763\nالاسم: محسن أميري\n\n💵 *نقدي:* ادفع في المارينا\n\n✅ أرسل الإيصال:\n📞 +968-77752752\n📞 +968-91142192\n\n*0* ⬅️ رجوع",
+        paymentInfo: "💳 *معلومات الدفع*\n\n🏦 *تحويل بنكي:*\nالبنك: بنك مسقط\nالحساب: ALHAMS ALAZRAQ LLC\nIBAN: 0319049638080027\n\n📱 *دفع موبايل:*\nالحساب: 71902763\nالاسم: محسن أميري\n\n💵 *نقدي:* ادفع في المارينا\n\n✅ أرسل الإيصال:\n📞 +968-77752752\n📞 +968-91220956\n\n*0* ⬅️ رجوع",
         
-        bookingInfo: "📞 *جاهز للحجز؟*\n\n*اتصل بنا:*\n📱 +968-77752752\n📱 +968-91142192\n🌐 www.muscatjoy.com\n\n📍 مارينا بندر الروضة\n⏰ 8 صباحاً - الغروب (يومياً)\n\n✨ نتطلع لخدمتكم!\n\n*0* ⬅️ رجوع",
+        bookingInfo: "📞 *جاهز للحجز؟*\n\n*اتصل بنا:*\n📱 +968-77752752\n📱+968-91220956\n🌐 www.muscatjoy.com\n\n📍 مارينا بندر الروضة\n⏰ 8 صباحاً - الغروب (يومياً)\n\n✨ نتطلع لخدمتكم!\n\n*0* ⬅️ رجوع",
         
-        humanHandoff: "✅ *جاري التوصيل بفريقنا...*\n\n👨‍💼 سيرد عليك موظف قريباً.\n\n📞 *اتصال مباشر:*\n+968-77752752\n+968-91142192\n🌐 www.muscatjoy.com\n\n⏰ رد سريع أثناء ساعات العمل!\n\n_اكتب *MENU* للعودة للخدمة الآلية._",
+        humanHandoff: "✅ *جاري التوصيل بفريقنا...*\n\n👨‍💼 سيرد عليك موظف قريباً.\n\n📞 *اتصال مباشر:*\n+968-77752752\n+968-91220956\n🌐 www.muscatjoy.com\n\n⏰ رد سريع أثناء ساعات العمل!\n\n_اكتب *MENU* للعودة للخدمة الآلية._",
         
         invalid: "❌ خيار غير صحيح. حاول مرة أخرى."
     }
