@@ -15,6 +15,7 @@ RUN npm install --production
 
 # Copy bot files
 COPY whatsapp_bot_complete.js .
+COPY images/ ./images/
 COPY config/ ./config/
 COPY services/ ./services/
 COPY views/ ./views/
